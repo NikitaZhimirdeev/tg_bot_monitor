@@ -40,7 +40,7 @@ def admmozhaysk(keywords):
     all_docs_mozhaysk = {}
     for keys in keywords:#[0:1]
         url = 'http://www.admmozhaysk.ru/docs/search?query='
-        for keyword in keys.split(' '): url += f'{keyword}+'
+        for keyword in keys.split(' '): url += f'{keyword.lower()}+'
         url = url.strip('+')
         # print(url)
 
@@ -94,9 +94,6 @@ def pavpos(keywords):
         for container in containers:
             name_1 = container.find('div', class_='name').find('a').text.strip()
             name_2 = container.find('div', class_='desc')#.text.strip()
-            # print(name_2.find_all('a'))
-            # if name_2.find_all('a') != None:
-            #     name_2 = name_2.text.replace(name_2.find('a').text, '')  # .strip()
 
             if name_2.find_all('a') != []:
                 find_a_txt = ''
@@ -107,7 +104,6 @@ def pavpos(keywords):
                 name_2 = name_2.text
             name_2 = name_2.strip()
 
-            # name = f"{container.find('div', class_='name').find('a').text.strip()} {container.find('div', class_='desc').text.strip().split('Приложение 1')[0].strip()}"
             names = f'{name_1} {name_2}'.split('\n')#.replace('\n', ' ')
             name = ''
             for n in names: name += f'{n.strip()} '
@@ -137,35 +133,6 @@ def main():
     if 'filtr.txt' not in os.listdir(dir_path):
         with open(os.path.join(dir_path, 'filtr.txt'), 'a') as f:
             pass
-    # NEW_DATA = {}
-    # filtr_read = read_filtr()
-    #
-    # for key, val in mozhaysk.items():
-    #     if key.strip() not in filtr_read:
-    #         print(f'{key} - {val}')
-    #         # write_filtr(key)
-    #         NEW_DATA[key] = val
-    #
-    # ALL = vos_mo | pavpos
-    #
-    # for key, val in ALL.items():
-    #     for words in keywords:
-    #         if words in key:
-    #             if not (key.strip() in filtr_read):
-    #                 # print(f'{words} - {key}')
-    #                 # print(f'{key} - {val}')
-    #                 # write_filtr(key)
-    #                 NEW_DATA[key] = val
-    # print(NEW_DATA)
 
-    # except:
-    #     for key, val in ALL.items():
-    #         write_filtr(key)
     return mozhaysk, vos_mo, pavpos
-
-# if __name__ == '__main__':
-#     main()
-    # main_mozhaysk()
-    # main_vos_mo()
-    # main_pavpos()
 

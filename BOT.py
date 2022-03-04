@@ -61,7 +61,7 @@ async def PARSER_WHILE():
             ALL = {**vos_mo, **pavpos}
             for key, val in ALL.items():
                 for words in keywords:
-                    if words in key:
+                    if words.lower() in key.lower():
                         if not (key.strip() in filtr_read):
                             # print(f'{words} - {key}')
                             # print(f'{key} - {val}')
@@ -155,12 +155,6 @@ async def PARSER(message: types.Message):
                     pass
 
 
-        # await asyncio.sleep(15) # Время сна, если необходимо изменить частоту проперки, то необходимо имменить число, время в секундах
-    # except:
-    #     print('sleep')
-    #     await asyncio.sleep(60)
-
-
 add_delete.register_handlers_admin(dp)
 
 
@@ -168,8 +162,4 @@ add_delete.register_handlers_admin(dp)
 loop = asyncio.get_event_loop()
 loop.create_task(PARSER_WHILE())
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
-# loop = asyncio.get_event_loop()
-# loop.create_task(PARSER_WHILE())
 
-#P http://www.admmozhaysk.ru/docs/doc/no928-62-ot-30.01.2018-ob-utverzhdenii-pravil-zemlepolzovaniya-i-zastrojki-territorii-chasti-territor-148791
-#S http://www.admmozhaysk.ru/docs/doc/no928-62-ot-30.01.2018-ob-utverzhdenii-pravil-zemlepolzovaniya-i-zastrojki-territorii-chasti-territor-148791
